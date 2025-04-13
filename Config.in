@@ -1,0 +1,5 @@
+#menu "My External Kernel Module"
+#source "package/mykernelmodule/Config.in"
+#endmenu
+source "$BR2_EXTERNAL_RUST_PATH/package/mykernelmodule/Config.in"
+
