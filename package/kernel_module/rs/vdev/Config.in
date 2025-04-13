@@ -1,0 +1,5 @@
+config BR2_PACKAGE_VDEV
+    bool "my kernel rust virtual dev"
+    depends on BR2_LINUX_KERNEL
+    help
+      A custom kernel module example in rust

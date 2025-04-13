@@ -1,0 +1,13 @@
+
+
+# rust-analyzer  
+
+```bash
+make -C .../linux-with-rust-support M=$PWD rust-analyzer
+make LLVM=1 ARCH=arm64 -C .../linux-with-rust-support M=$PWD rust-analyzer
+```
+
+这样可以生成`rust-project.json`，因为一般没有`Cargo.toml`可以用于分析。  
+这个在内核目录直接使用是生效的，但是在外部模块，似乎只能免疫报错，但是无法跳转？  
+
+

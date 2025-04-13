@@ -1,4 +1,5 @@
 menu "My External Kernel Module"
 source "$BR2_EXTERNAL_RUST_PATH/package/kernel_module/c/mykernelmodule/Config.in"
+source "$BR2_EXTERNAL_RUST_PATH/package/kernel_module/rs/vdev/Config.in"
 endmenu
 
