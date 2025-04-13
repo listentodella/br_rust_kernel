@@ -1,5 +1,5 @@
 MYKERNELMODULE_VERSION = 1.0
-MYKERNELMODULE_SITE = $(BR2_EXTERNAL_RUST_PATH)/package/mykernelmodule
+MYKERNELMODULE_SITE = $(BR2_EXTERNAL_RUST_PATH)/package/kernel_module/c/mykernelmodule
 # 如果你的源代码放在外部树的 package 目录内，可以使用 local 方法。
 MYKERNELMODULE_SITE_METHOD = local
 # 如果在 git 上，可以设置为 git 地址，并设置 MY_KERNEL_MODULE_SITE_METHOD = git
