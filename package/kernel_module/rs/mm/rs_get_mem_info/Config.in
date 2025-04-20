@@ -1,4 +1,4 @@
-config BR2_PACKAGE_GET_SYSTEM_MEM_INFO
+config BR2_PACKAGE_RS_GET_MEM_INFO
     bool "get system memory info in RUST"
     depends on BR2_LINUX_KERNEL
     help

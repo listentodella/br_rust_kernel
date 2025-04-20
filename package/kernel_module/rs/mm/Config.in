@@ -7,7 +7,7 @@ config BR2_PACKAGE_MM
       Memory Learing in RUST
 
 if BR2_PACKAGE_MM
-    source "$BR2_EXTERNAL_RUST_PATH/package/kernel_module/rs/mm/get_system_mem_info/Config.in"
+    source "$BR2_EXTERNAL_RUST_PATH/package/kernel_module/rs/mm/rs_get_mem_info/Config.in"
 endif
 
 

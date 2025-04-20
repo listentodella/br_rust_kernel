@@ -27,6 +27,7 @@ fn get_totalram_pages() -> i64 {
 
 extern "C" {
     fn si_meminfo(info: *mut kernel::bindings::sysinfo);
+    fn c_get_num_physpages() -> u64;
 }
 
 fn get_meminfo() -> kernel::bindings::sysinfo {
@@ -57,6 +58,8 @@ impl kernel::Module for RustMemInfo {
         //let totalram_pages = totalram_pages.load(Ordering::Relaxed);
         let totalram_pages = get_totalram_pages();
         pr_info!("get totalram_pages = {}\n", totalram_pages);
+        let page_nums = unsafe { c_get_num_physpages() };
+        pr_info!("get page nums = {}\n", page_nums);
 
         Ok(RustMemInfo)
     }
