@@ -1,0 +1,14 @@
+menu "MM C Modules"
+
+config BR2_PACKAGE_MM_C
+    bool "kernel mem learing in C"
+    depends on BR2_LINUX_KERNEL
+    help
+      Memory Learing in C
+
+if BR2_PACKAGE_MM_C
+    source "$BR2_EXTERNAL_RUST_PATH/package/kernel_module/c/mm/get_mem_info/Config.in"
+endif
+
+
+endmenu

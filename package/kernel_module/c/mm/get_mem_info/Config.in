@@ -1,0 +1,5 @@
+config BR2_PACKAGE_GET_MEM_INFO
+    bool "get system memory info in C"
+    depends on BR2_LINUX_KERNEL
+    help
+      Memory Learing in C
