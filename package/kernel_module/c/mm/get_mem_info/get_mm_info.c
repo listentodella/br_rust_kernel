@@ -16,8 +16,9 @@ static int __init my_init(void)
         writeback = 0, mappedtodisk = 0;
 
     unsigned long num_physpages;
+    pr_info("ARCH_PFN_OFFSET = %ld\n", ARCH_PFN_OFFSET)
 
-    num_physpages = get_num_physpages();
+        num_physpages = get_num_physpages();
     for (i = 0; i < num_physpages; i++) {
         /* Most of ARM systems have ARCH_PFN_OFFSET */
         pfn = i + ARCH_PFN_OFFSET;
@@ -45,17 +46,17 @@ static int __init my_init(void)
         }
         struct folio *folio = page_folio(p);
         //if (pageswapcache(p)) {
-        if (folio_test_swapcache(folio)){
+        if (folio_test_swapcache(folio)) {
             swapcache++;
         }
 
         //if (PageReferenced(p)) {
-        if (folio_test_referenced(folio)){
+        if (folio_test_referenced(folio)) {
             referenced++;
         }
 
         /* if (PageSlab(p)) { */
-        if (folio_test_slab(folio)){
+        if (folio_test_slab(folio)) {
             slab++;
         }
 
@@ -64,7 +65,7 @@ static int __init my_init(void)
         }
 
         //if (PageUptodate(p)) {
-        if(folio_test_uptodate(folio)) {
+        if (folio_test_uptodate(folio)) {
             uptodate++;
         }
 
@@ -73,17 +74,17 @@ static int __init my_init(void)
         }
 
         //if (PageActive(p)) {
-        if (folio_test_active(folio)){
+        if (folio_test_active(folio)) {
             active++;
         }
 
         /* if (PageWriteback(p)) { */
-        if (folio_test_writeback(folio)){
+        if (folio_test_writeback(folio)) {
             writeback++;
         }
 
         /* if (PageMappedToDisk(p)) { */
-        if (folio_test_mappedtodisk(folio)){
+        if (folio_test_mappedtodisk(folio)) {
             mappedtodisk++;
         }
     }

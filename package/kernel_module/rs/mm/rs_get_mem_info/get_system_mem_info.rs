@@ -21,6 +21,7 @@ use kernel::{c_str, device::Device, fs::File, new_mutex, prelude::*, sync::Mutex
 extern "C" {
     static _totalram_pages: AtomicI64;
     fn si_meminfo(info: *mut kernel::bindings::sysinfo);
+    fn pfn_is_map_memory(pfn: u64) -> bool;
 }
 
 fn get_totalram_pages() -> i64 {
@@ -83,6 +84,7 @@ impl kernel::Module for RustMemInfo {
         let page_nums = unsafe { c_get_num_physpages() };
         let mem_size = page_nums * kernel::page::PAGE_SIZE as u64 / 1024 / 1024;
         pr_info!("{} pages = {} MB\n", page_nums, mem_size);
+        pr_info!("ARCH_PFN_OFFSET = {}\n", unsafe { c_get_pfn_offset() });
 
         let mut valid_pages = 0u64;
         let mut free_pages = 0u64;
@@ -101,7 +103,8 @@ impl kernel::Module for RustMemInfo {
         for p in 0..page_nums {
             // Most ARM arch has ARCH_PFN_OFFSET
             let pfn = unsafe { p + c_get_pfn_offset() };
-            if !unsafe { c_pfn_valid(pfn) } {
+            // if !unsafe { c_pfn_valid(pfn) } {
+            if !unsafe { pfn_is_map_memory(pfn) } {
                 continue;
             }
             valid_pages += 1;

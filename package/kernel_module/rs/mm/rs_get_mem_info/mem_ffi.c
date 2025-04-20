@@ -12,7 +12,8 @@ struct page *c_pfn_to_page(u64 pfn)
 //u64 C_ARCH_PFN_OFFSET = ARCH_PFN_OFFSET;
 u64 c_get_pfn_offset(void)
 {
-    return ARCH_PFN_OFFSET;
+    //return ARCH_PFN_OFFSET;
+    return 0;
 }
 
 unsigned long c_get_num_physpages(void)
