@@ -53,12 +53,21 @@ impl kernel::Module for RustAllocMem {
                 size
             );
             let layout = Layout::from_size_align(size, PAGE_SIZE).unwrap();
-            let ret = Kmalloc::alloc(layout, GFP_ATOMIC);
+            let mut ret = Kmalloc::alloc(layout, GFP_ATOMIC);
             if !ret.is_ok() {
                 pr_err!("Failed to kmalloc for size = {}\n", size);
                 break;
             }
-            ret.iter().for_each(|x| unsafe { x.write(order as u8) });
+            let mem = ret.unwrap();
+            let len = mem.len();
+            let ptr = mem.as_ptr() as *mut u8;
+            pr_info!("mem = {:?}", mem);
+            unsafe {
+                core::ptr::write_bytes(ptr, order as u8, len);
+                let slice = core::slice::from_raw_parts(ptr, len.min(8));
+                pr_info!("data = {:?}\n", slice);
+            }
+
             // do we need free since we use rust?
             // unsafe {
             //     Kmalloc::free(ret.unwrap(), layout);
