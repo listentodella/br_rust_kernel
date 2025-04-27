@@ -67,6 +67,13 @@ impl kernel::Module for RustAllocMem {
                 let slice = core::slice::from_raw_parts(ptr, len.min(8));
                 pr_info!("data = {:?}\n", slice);
             }
+            /* or use below
+            let mut ret = ret.unwrap();
+            pr_info!("slice len = {}\n", ret.len());
+            unsafe {
+                ret.as_mut().iter_mut().for_each(|x| *x = order as u8);
+            }
+            */
 
             // do we need free since we use rust?
             // unsafe {
